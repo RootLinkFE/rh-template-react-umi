@@ -1,0 +1,59 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "cross-env UMI_ENV=local umi dev",
+    "start:test": "cross-env UMI_ENV=test umi dev",
+    "build": "umi build",
+    "build:dev": "cross-env UMI_ENV=dev umi build",
+    "build:prod": "cross-env UMI_ENV=prod umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "npm run commitmsg"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "@ant-design/pro-layout": "^6.19.5",
+    "@umijs/preset-react": "1.x",
+    "antd": "^4.16.3",
+    "bizcharts": "^4.1.10",
+    "brownies": "^3.0.0",
+    "classnames": "^2.3.1",
+    "cross-env": "^7.0.3",
+    "lodash": "^4.17.21",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "reset-css": "^5.0.1",
+    "umi": "^3.4.25"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/lodash": "^4.14.170",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@umijs/test": "^3.4.25",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.0",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0"
+  }
+}
