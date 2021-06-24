@@ -1,5 +1,6 @@
 import RhEvent from '@/shared/event';
 import { useEffect, useState } from 'react';
+
 import styles from './index.less';
 
 export default function IndexPage() {

@@ -1,7 +1,15 @@
 const routes = [
   { name: '首页', path: '/', component: '@/pages/index' },
-  { name: '左屏', path: '/left', component: '@/pages/left/index' },
-  { name: '右屏', path: '/right', component: '@/pages/right/index' },
+  {
+    name: '模型管理',
+    path: '/protocol-manage',
+    component: '@/pages/protocol-manage/index',
+  },
+  {
+    name: '协议建模',
+    path: '/protocol-create',
+    component: '@/pages/protocol-create/index',
+  },
   { path: '/demo', component: '@/pages/demo/index' },
   {
     component: './404',
