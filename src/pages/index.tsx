@@ -9,8 +9,9 @@ const { Header, Content, Sider } = Layout;
 const Team: React.FC = function ({ children }) {
   const history = useHistory();
   return (
-    <Layout hasSider>
-      <Sider className={styles.sidebar} width={220}>
+    <Layout>
+      {/* hasSider */}
+      {/* <Sider className={styles.sidebar} width={220}>
         <RhSider
           menus={[
             {
@@ -35,7 +36,7 @@ const Team: React.FC = function ({ children }) {
             },
           ]}
         ></RhSider>
-      </Sider>
+      </Sider> */}
       <Content style={{ padding: '0 20px', minHeight: 280 }}>
         {children}
         <Link

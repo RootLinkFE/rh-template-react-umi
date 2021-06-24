@@ -7,6 +7,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  layout: {},
   publicPath: '/',
   routes: routes,
   fastRefresh: {},
