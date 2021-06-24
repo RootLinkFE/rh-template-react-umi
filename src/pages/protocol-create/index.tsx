@@ -1,70 +1,57 @@
-import React from 'react';
-import { Tree } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
+import { PageContainer } from '@ant-design/pro-layout';
+import ProCard from '@ant-design/pro-card';
 
-const treeData = [
-  {
-    title: 'parent 1',
-    key: '0-0',
-    children: [
-      {
-        title: 'parent 1-0',
-        key: '0-0-0',
-        children: [
-          {
-            title: 'leaf',
-            key: '0-0-0-0',
-          },
-          {
-            title: 'leaf',
-            key: '0-0-0-1',
-          },
-          {
-            title: 'leaf',
-            key: '0-0-0-2',
-          },
-        ],
-      },
-      {
-        title: 'parent 1-1',
-        key: '0-0-1',
-        children: [
-          {
-            title: 'leaf',
-            key: '0-0-1-0',
-          },
-        ],
-      },
-      {
-        title: 'parent 1-2',
-        key: '0-0-2',
-        children: [
-          {
-            title: 'leaf',
-            key: '0-0-2-0',
-          },
-          {
-            title: 'leaf',
-            key: '0-0-2-1',
-          },
-        ],
-      },
-    ],
-  },
-];
+import Descriptions from './descriptions';
+import Tree from './tree';
 
-export default () => {
-  const onSelect = (selectedKeys: any, info: any) => {
-    console.log('selected', selectedKeys, info);
-  };
-
+export default function IndexPage() {
   return (
-    <Tree
-      showLine
-      switcherIcon={<DownOutlined />}
-      defaultExpandedKeys={['0-0-0']}
-      onSelect={onSelect}
-      treeData={treeData}
-    />
+    <div
+      style={{
+        boxShadow: '0 0 8px rgba(0, 0, 0, 0.2)',
+        height: '100vh',
+        background: '#F5F7FA',
+      }}
+    >
+      <PageContainer
+        // fixedHeader
+        ghost
+        loading={false}
+        header={{
+          title: '',
+          breadcrumb: {
+            routes: [
+              {
+                path: '',
+                breadcrumbName: '协议建模',
+              },
+              {
+                path: '',
+                breadcrumbName: '模型管理',
+              },
+              {
+                path: '',
+                breadcrumbName: '起重机',
+              },
+            ],
+          },
+        }}
+      >
+        <div>
+          <ProCard direction="column" ghost gutter={[0, 16]}>
+            <ProCard style={{ height: 200 }}>
+              <Descriptions></Descriptions>
+            </ProCard>
+            <ProCard gutter={16} ghost style={{ height: 200 }}>
+              <ProCard colSpan={8}>
+                <Tree></Tree>
+              </ProCard>
+              <ProCard colSpan={16}></ProCard>
+            </ProCard>
+          </ProCard>
+        </div>
+      </PageContainer>
+    </div>
   );
-};
+}

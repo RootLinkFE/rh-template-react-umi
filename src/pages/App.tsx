@@ -1,4 +1,3 @@
-import TeamHeader from '@/components/layout/RhHeader';
 import { Layout, Menu, Breadcrumb, Card, ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 
@@ -12,9 +11,7 @@ const DefaultLayout: React.FunctionComponent = function ({ children }) {
         className={styles.team + ' team-root antd-kube-theme'}
         style={{ height: '100vh' }}
       >
-        <Header className={styles.header}>
-          <TeamHeader />
-        </Header>
+        <Header className={styles.header}></Header>
         <Content style={{ padding: '20px 20px 24px' }}>{children}</Content>
       </Layout>
     </ConfigProvider>

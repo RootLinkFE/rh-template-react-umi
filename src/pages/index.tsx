@@ -2,7 +2,6 @@ import RhSider from '@/components/layout/RhSider';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 import { useHistory, Link } from 'umi';
-import styles from './index.less';
 
 const { Header, Content, Sider } = Layout;
 
