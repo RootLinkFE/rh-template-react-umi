@@ -2,6 +2,8 @@ import RhSider from '@/components/layout/RhSider';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 import { useHistory, Link } from 'umi';
+import Analysis from './analysis/index';
+import Demo from './demo/index';
 
 const { Header, Content, Sider } = Layout;
 
@@ -36,13 +38,11 @@ const Team: React.FC = function ({ children }) {
           ]}
         ></RhSider>
       </Sider> */}
-      <Content style={{ padding: '0 20px', minHeight: 280 }}>
+      <Content style={{ padding: '20px', minHeight: 280 }}>
         {children}
-        <Link
-          to={'/demo'}
-          style={{ display: 'block', marginTop: '50px', fontSize: 16 }}
-        >
-          G2 BizCharts Demo
+        <Analysis />
+        <Link to={'/demo'} className="block mt-50 text-2xl">
+          demo
         </Link>
       </Content>
     </Layout>

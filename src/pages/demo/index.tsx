@@ -129,11 +129,7 @@ const data = [
 
 const DemoPage: React.FC = () => (
   <>
-    <Button type="primary" onClick={() => history.push('/')}>
-      Back Home
-    </Button>
-    <br />
-    更多见：{' '}
+    更多见：
     <a
       href="https://bizcharts.net/product/BizCharts4/gallery"
       target="_blank"
