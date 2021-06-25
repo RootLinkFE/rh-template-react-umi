@@ -11,8 +11,8 @@ export default () => {
   return (
     <div>
       <div className={styles.descHeader}>
-        <img width={100} src={require('/src/assets/images/qizhongji.jpeg')} />
-        <span className={styles.descHeaderTitle}>汽车起重机</span>
+        <img width={120} src={require('/src/assets/images/qizhongji.jpeg')} />
+        <span className={styles.descHeaderTitle + ' ml-10'}>汽车起重机</span>
       </div>
       <ProDescriptions
         actionRef={actionRef}
