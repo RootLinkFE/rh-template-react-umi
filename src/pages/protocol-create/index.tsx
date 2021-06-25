@@ -47,7 +47,9 @@ export default function IndexPage() {
               <ProCard colSpan={8}>
                 <Tree></Tree>
               </ProCard>
-              <ProCard colSpan={16}></ProCard>
+              <ProCard colSpan={16}>
+                <h3>这里有东西</h3>
+              </ProCard>
             </ProCard>
           </ProCard>
         </div>
