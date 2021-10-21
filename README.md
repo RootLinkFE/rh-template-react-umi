@@ -11,6 +11,13 @@
 - axios
 - ……
 
+## 功能特点
+
+- Antd 样式覆写，满足 UI 风格
+  - 如果要去掉，可以注释`styles/reset/index.less`
+- Swagger Doc Api TypeScript 接口代码生成
+- 主题换色
+
 ## 使用说明
 
 Install dependencies,
@@ -44,13 +51,13 @@ TypeScript 的 API 生成通过自研 `@roothub/cli` 来生成，生成的文件
 **BaseApi**
 
 ```bash
-rh api http://81.70.116.84/leekhub-model-server/v2/api-docs?group=PROTOCOL%20SERVER%20base%20API -n
+rh api http://81.70.xx.84/leekhub-model-server/v2/api-docs?group=PROTOCOL%20SERVER%20base%20API -n
 ```
 
 执行示例 eg:
 
 ```
-🍖️   找到 protocolApi 资源
+🍖️   找到 BaseApi 资源
 ✅   生成接口文件：/Users/giscafer/Code/irootech/leekhub-web/src/rh/apis/Base/data-contracts.ts
 ✅   生成接口文件：/Users/giscafer/Code/irootech/leekhub-web/src/rh/apis/Base/Api.ts
 ```
@@ -59,13 +66,10 @@ rh api http://81.70.116.84/leekhub-model-server/v2/api-docs?group=PROTOCOL%20SER
 
 ## 其他
 
-拓扑图选型
+拓扑图\统计图表
 
 - Diagram Maker: https://awslabs.github.io/diagram-maker/
 - Topology : http://topology.le5le.com/
 - G6: https://g6.antv.vision/
   - graphin: https://graphin.antv.vision/graphin/quick-start/overview/
-
-统计图表
-
 - bizcharts ： https://www.bizcharts.net/

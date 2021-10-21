@@ -22,6 +22,23 @@ export default [
     icon: "dashboard",
     component: "./Welcome",
   },
+  {
+    path: "/table",
+    name: "表格示例",
+    icon: "table",
+    routes: [
+      {
+        path: "/table/simple",
+        name: "简单表格",
+        component: "./table/simple",
+      },
+      {
+        path: "/table/complex",
+        name: "复杂表格",
+        component: "./table/complex",
+      },
+    ],
+  },
 
   {
     path: "/",

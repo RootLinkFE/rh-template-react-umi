@@ -192,7 +192,7 @@ const RhTable = <
       );
     }
 
-    if (valueType === "dateRange") {
+    if (valueType === "dateRange" || valueType === "dateTime") {
       return (
         <ProFormDateRangePicker
           key={dataIndex}
