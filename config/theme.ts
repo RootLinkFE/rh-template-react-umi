@@ -1,32 +1,48 @@
-const { getThemeVariables } = require('antd/dist/theme');
+// Theme for antd: https://ant.design/docs/react/customize-theme-cn
+
+const { getThemeVariables } = require("antd/dist/theme");
 const theme = getThemeVariables({
   // compact: true,
 });
 
 Object.assign(theme, {
-  // main
-  'primary-color': '#e60000',
-  'link-color': '#e60111',
-  // 'link-color': '#242e42', // 灰黑
-  'link-hover-color': '#d12d25',
-  'ink-active-color': '#e60111',
-  // Background color for `<body>`
-  'body-background': '#eff4f9',
-  // layout
-  // "layout-body-background": "#eff4f9",
-  // "layout-sider-background": "#eff4f9",
-  // card
-  'card-radius': '4px',
-  'card-padding-base': '12px',
-  'card-inner-head-padding': '10px',
-  // button
-  'btn-font-weight': '400',
-  'btn-border-radius-base': '100px',
-  'btn-border-radius-sm': '80px',
-  'btn-shadow': '0 8px 16px 0 rgb(35 45 65 / 28%)',
-  'btn-padding-horizontal-base': '22px',
+  // -------- Colors -----------
+  // 'primary-color': '#00B259',
+  "info-color": "#3377FF",
+  "success-color": "#00B259",
+  "warning-color": "#EFC100",
+  "error-color": "#E60000",
+  "normal-color": "#9EA5B2",
+  "text-color-secondary": "#505363",
+  "disabled-color": "#C6CCD7",
+  // 'primary-disabled-color': '#daf2e6',
+  "danger-disabled-color": "#e67373",
+  "divider-color": "#EBECEF",
+  "border-color-base": "#D4D9E2",
+  "border-color-split": "#EBECEF",
+  "tabs-background-color": "#f9f9fb",
+  // Base Scaffolding Variables
+  "font-family": `微软雅黑,苹方-简,宋体,PingFangSC,Microsoft yahei,Simsun,Helvetica Neue,Arial`,
 
-  'btn-primary-bg': '#e60000',
+  // -------- Border -----------
+  "outline-width": "1px",
+  "border-radius-base": "0",
+  // -------- Modal -----------
+  "modal-header-title-font-size": "20px",
+  "modal-header-border-width": "0px",
+  "modal-header-padding-vertical": "24px",
+  "modal-header-padding-horizontal": "40px",
+  "modal-body-padding": "8px 40px",
+  "modal-footer-border-width": "0px",
+  "modal-footer-padding-vertical": "24px",
+  "modal-footer-padding-horizontal": "40px",
+  "table-header-cell-split-color": "transparent",
 });
 
 export default theme;
+
+const sanyRed = "#e50113"; // '#C6000B'
+const sanyBlue = "#386BD7";
+const rootcloudGreen = "#00b259";
+
+export const colorSet = [rootcloudGreen, sanyBlue, sanyRed];
