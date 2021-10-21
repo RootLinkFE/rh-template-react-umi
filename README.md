@@ -1,6 +1,6 @@
 # rh-template-react-umi
 
-基于 Umi 的工程脚手架
+基于 Umi 的工程脚手架，http://umi.leekhub.com
 
 ## 依赖
 

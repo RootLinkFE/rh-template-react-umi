@@ -105,7 +105,12 @@ const Login: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.left}>
           <Link to="/">
-            <img alt="logo" className={styles.logo} src="/logo.png" />
+            <img
+              alt="logo"
+              className={styles.logo}
+              src="/logo.svg"
+              width={32}
+            />
             <Divider type="vertical" />
             <span className={styles.title}>RootHub Scaffold</span>
           </Link>
@@ -151,7 +156,7 @@ const Login: React.FC = () => {
                 size: "large",
                 maxLength: 11,
               }}
-              placeholder="请输入手机号码"
+              placeholder="请输入手机号码(随意手机)"
               rules={[
                 {
                   required: true,
@@ -175,7 +180,7 @@ const Login: React.FC = () => {
                   message: "请输入密码!",
                 },
               ]}
-              placeholder="请输入密码"
+              placeholder="请输入密码(随意)"
             />
           </ProForm>
           <a
