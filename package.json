@@ -1,6 +1,6 @@
 {
-    "name": "rh-template-react-umi",
-    "version": "0.1.0",
+    "name": "rh-template-umi",
+    "version": "1.0.0",
     "private": true,
     "description": "基于Umi的工程脚手架",
     "scripts": {

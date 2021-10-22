@@ -2,6 +2,8 @@
 
 基于 Umi 的工程脚手架，http://umi.leekhub.com
 
+![](./demo.png)
+
 ## 依赖
 
 - Antd 4.14.x
@@ -58,8 +60,8 @@ rh api http://81.70.xx.84/leekhub-model-server/v2/api-docs?group=PROTOCOL%20SERV
 
 ```
 🍖️   找到 BaseApi 资源
-✅   生成接口文件：/Users/giscafer/Code/irootech/leekhub-web/src/rh/apis/Base/data-contracts.ts
-✅   生成接口文件：/Users/giscafer/Code/irootech/leekhub-web/src/rh/apis/Base/Api.ts
+✅   生成接口文件：/Users/giscafer/Code/leekhub-web/src/rh/apis/Base/data-contracts.ts
+✅   生成接口文件：/Users/giscafer/Code/leekhub-web/src/rh/apis/Base/Api.ts
 ```
 
 生成代码有规范校验问题，就执行以下 `yarn lint:api`

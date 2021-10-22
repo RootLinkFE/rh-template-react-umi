@@ -1,7 +1,7 @@
-@import "./variables.less";
-@import "./helper.css";
-@import "./reset/index.less";
-@import "./common.less";
+@import './variables.less';
+@import './helper.css';
+@import './reset/index.less';
+@import './common.less';
 
 .page-content {
   position: relative;
@@ -43,7 +43,7 @@
   font-size: 14px;
   font-family: SimSun, sans-serif;
   line-height: 1;
-  content: "*";
+  content: '*';
 }
 
 .ant-pro-global-header-layout-mix {
@@ -61,8 +61,8 @@
 
 .ant-layout-sider-children {
   // 左侧导航菜单样式重置开始
-  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    padding-left: 40px !important;
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item.ant-menu-item-selected {
+    // padding-left: 40px !important;
     background-color: #f2f2f5 !important;
   }
 
@@ -78,10 +78,6 @@
     .ant-pro-sider-link {
       padding-left: 16px !important;
     }
-  }
-
-  .ant-menu-item-only-child {
-    padding-left: 40px !important;
   }
 
   .ant-menu-vertical .ant-menu-item::after,
@@ -122,7 +118,7 @@
         display: inline-block;
         font-size: 16px;
         transform: scaleY(1.5) translateY(-2px);
-        content: "<";
+        content: '<';
       }
     }
 
@@ -131,7 +127,7 @@
         display: inline-block;
         font-size: 16px;
         transform: scaleY(1.5) translateY(-2px);
-        content: ">";
+        content: '>';
       }
     }
   }
