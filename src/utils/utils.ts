@@ -1,9 +1,8 @@
-import JSEncrypt from "jsencrypt";
-import dayjs from "dayjs";
-const reg =
-  /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
+import JSEncrypt from 'jsencrypt';
+import dayjs from 'dayjs';
+import { urlReg } from './regexp';
 
-export const isUrl = (path: string): boolean => reg.test(path);
+export const isUrl = (path: string): boolean => urlReg.test(path);
 
 /**
  * 数组排序
@@ -41,22 +40,22 @@ export const waitTime = (time: number = 100) => {
 };
 
 export const isAntDesignPro = (): boolean => {
-  if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === "site") {
+  if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     return true;
   }
-  return window.location.hostname === "preview.pro.ant.design";
+  return window.location.hostname === 'preview.pro.ant.design';
 };
 
 // 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
 export const isAntDesignProOrDev = (): boolean => {
   const { NODE_ENV } = process.env;
-  if (NODE_ENV === "development") {
+  if (NODE_ENV === 'development') {
     return true;
   }
   return isAntDesignPro();
 };
 
-const isNil = (value: any) => [undefined, null, ""].includes(value);
+const isNil = (value: any) => [undefined, null, ''].includes(value);
 
 /**
  * 进制转换
@@ -75,12 +74,12 @@ export const convertNumber = (
     fillString?: string; // 填充字符
   }
 ) => {
-  let newValue = "";
+  let newValue = '';
   const { unit, array, maxLength, fillString } = options || {};
 
   if (!isNil(value)) {
     newValue = Number.isNaN(Number(value))
-      ? ""
+      ? ''
       : Number(value).toString(system);
   }
 
@@ -89,7 +88,7 @@ export const convertNumber = (
   }
 
   if (array) {
-    return newValue.split("");
+    return newValue.split('');
   }
 
   if (unit && newValue) {
@@ -106,17 +105,17 @@ export const convertNumber = (
 
 // 非对称加密-获取公钥设置加密方法
 const publicKey =
-  "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCW3fQpZiXmj7+OnwtvtxYA353AEqW9LA2TvCqWNNdMRtaEIgbmV6qYQE+Osy/M0J+tdRwazA4DWKt8qPkcKUKPynMiTWIGePMHj8J6DCnqP2zmOo5QRQN2YMVLC0cA2bOiZt84Loc+sYctTZAdWKukf1+SzZe+aYS/Snw73mxA7QIDAQAB";
+  'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCW3fQpZiXmj7+OnwtvtxYA353AEqW9LA2TvCqWNNdMRtaEIgbmV6qYQE+Osy/M0J+tdRwazA4DWKt8qPkcKUKPynMiTWIGePMHj8J6DCnqP2zmOo5QRQN2YMVLC0cA2bOiZt84Loc+sYctTZAdWKukf1+SzZe+aYS/Snw73mxA7QIDAQAB';
 const encryptObj = new JSEncrypt({});
 encryptObj.setPublicKey(publicKey);
 export const encrypt = encryptObj;
 
 export const dateFormat = (
   date: Date | string | number | undefined,
-  formatter = "YYYY-MM-DD HH:mm:ss"
+  formatter = 'YYYY-MM-DD HH:mm:ss'
 ) => {
   if (!date) {
-    return "";
+    return '';
   }
   return dayjs(date).format(formatter);
 };

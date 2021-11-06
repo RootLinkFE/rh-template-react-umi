@@ -227,7 +227,7 @@ const RhTable = <
           }}
           footerRender={(onConfirm) => {
             onConfirmRef.current = onConfirm;
-            return <></>;
+            return false;
           }}
         />
       );

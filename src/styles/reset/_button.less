@@ -7,18 +7,18 @@
 @danger-hover-bg-color: #e60000;
 @danger-active-bg-color: #e60000;
 @primary-disabled-color: @disabled-color;
-@btnHeight: 36px;
+@btnHeight: 32px;
 
 .ant-input-search-button {
-  height: @btnHeight !important;
+  height: @btnHeight+4 !important;
 }
 .ant-btn {
   min-width: 96px;
   // 覆写 start
   height: @btnHeight;
-  padding: 10px 24px;
-  color: #505363;
-  line-height: 4px;
+  padding: 8px 16px;
+  // color: #505363;
+  line-height: 10px;
   outline: none !important;
   // 覆写end
   &.ant-btn-icon-only {
@@ -85,9 +85,12 @@
 .ant-btn-sm {
   min-width: 80px;
   height: 28px;
+  padding: 4px 10px !important;
 }
 .ant-btn-lg {
   min-width: 104px;
+  height: 36px;
+  padding: 10px 24px;
 }
 .ant-btn-big {
   min-width: 128px;
@@ -110,12 +113,13 @@
     border: 1px solid @primary-disabled-color !important;
   }
 }
-.ant-btn-danger {
-  color: @danger-text-color;
+.ant-btn-dangerous {
+  color: @danger-text-color !important;
   text-shadow: none;
   background-color: @white-color;
   border-color: @danger-text-color;
   &:not([disabled]):hover {
+    color: @white-color !important;
     background-color: @danger-hover-bg-color;
   }
   &:not([disabled]):active {
@@ -136,5 +140,8 @@
   background-color: transparent;
   &.ant-btn-primary {
     color: @primary-color !important;
+    &:hover {
+      color: @white-color !important;
+    }
   }
 }
