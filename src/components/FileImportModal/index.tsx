@@ -4,9 +4,9 @@
  * @Description: 文件导入弹窗
  */
 
-import { ModalForm, ProFormUploadButton } from "@ant-design/pro-form";
-import { Form } from "antd";
-import React from "react";
+import { ModalForm, ProFormUploadButton } from '@ant-design/pro-form';
+import { Form } from 'antd';
+import React from 'react';
 
 const FileImportModal: React.FC<{
   visible?: boolean;
@@ -18,9 +18,9 @@ const FileImportModal: React.FC<{
   onFinish?: (formData: any) => Promise<boolean | void>;
 }> = ({
   visible = false,
-  title = "",
+  title = '',
   width = 600,
-  downloadUrl = "",
+  downloadUrl = '',
   onCancel = () => {},
   onOk = () => {},
   onFinish = () => Promise.resolve(),
@@ -48,7 +48,7 @@ const FileImportModal: React.FC<{
         name="file"
         title="上传文件"
         max={1}
-        rules={[{ required: true, message: "请选择文件" }]}
+        rules={[{ required: true, message: '请选择文件' }]}
         fieldProps={{
           beforeUpload: () => false,
         }}

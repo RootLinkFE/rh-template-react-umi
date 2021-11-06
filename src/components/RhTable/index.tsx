@@ -6,8 +6,8 @@
  * @desc 简单包装，方便日后改动定制，使用方式和 ProTable 一致
  */
 
-import { SearchOutlined } from "@ant-design/icons";
-import type { ProFormColumnsType, ProFormInstance } from "@ant-design/pro-form";
+import { SearchOutlined } from '@ant-design/icons';
+import type { ProFormColumnsType, ProFormInstance } from '@ant-design/pro-form';
 import {
   BetaSchemaForm,
   LightFilter,
@@ -16,14 +16,14 @@ import {
   ProFormDigit,
   ProFormSelect,
   ProFormText,
-} from "@ant-design/pro-form";
-import type { ParamsType } from "@ant-design/pro-provider";
-import type { ActionType, ProTableProps } from "@ant-design/pro-table";
-import ProTable from "@ant-design/pro-table";
-import type { PageInfo, ProColumns } from "@ant-design/pro-table/lib/typing";
-import { useDebounceFn } from "ahooks";
-import { useCallback, useMemo, useRef } from "react";
-import "./index.less";
+} from '@ant-design/pro-form';
+import type { ParamsType } from '@ant-design/pro-provider';
+import type { ActionType, ProTableProps } from '@ant-design/pro-table';
+import ProTable from '@ant-design/pro-table';
+import type { PageInfo, ProColumns } from '@ant-design/pro-table/lib/typing';
+import { useDebounceFn } from 'ahooks';
+import { useCallback, useMemo, useRef } from 'react';
+import './index.less';
 
 export type RhTableProps<DataType, Params, ValueType> = ProTableProps<
   DataType,
@@ -31,7 +31,7 @@ export type RhTableProps<DataType, Params, ValueType> = ProTableProps<
   ValueType
 >;
 
-export type RhColumns<T = any, ValueType = "text"> = ProColumns<
+export type RhColumns<T = any, ValueType = 'text'> = ProColumns<
   T,
   ValueType
 > & {
@@ -40,7 +40,7 @@ export type RhColumns<T = any, ValueType = "text"> = ProColumns<
    * @string 'query' | 'light'
    * @default 'query'
    */
-  filterType?: "query" | "light";
+  filterType?: 'query' | 'light';
 };
 
 export type RhActionType = ActionType & {
@@ -50,7 +50,7 @@ export type RhActionType = ActionType & {
 const RhTable = <
   DataType extends Record<string, any>,
   Params extends ParamsType = ParamsType,
-  ValueType = "text"
+  ValueType = 'text'
 >(
   props: RhTableProps<DataType, Params, ValueType>
 ) => {
@@ -59,6 +59,7 @@ const RhTable = <
     search,
     request = () => Promise.resolve({}),
     debounceTime = 500,
+    toolBarRender, // 特殊用途，用于查询条件比较小的情况下
     ...restProps
   } = props;
   const queryFilterFormRef = useRef<ProFormInstance>();
@@ -74,14 +75,14 @@ const RhTable = <
 
   // 查询列定义
   const filterColumns: RhColumns[] = useMemo(() => {
-    const defaultFilterType = search ? search.filterType : "query";
+    const defaultFilterType = search ? search.filterType : 'query';
 
     return columns
       .map((column: any) => {
         const {
           search: columnSearch,
           hideInSearch,
-          valueType = "text",
+          valueType = 'text',
           valueEnum,
           title,
           filterType = defaultFilterType,
@@ -92,7 +93,7 @@ const RhTable = <
         if (
           columnSearch === false ||
           hideInSearch === true ||
-          valueType === "option"
+          valueType === 'option'
         ) {
           return false;
         }
@@ -100,39 +101,39 @@ const RhTable = <
         return {
           ...column,
           filterType,
-          valueType: valueEnum ? "select" : valueType,
+          valueType: valueEnum ? 'select' : valueType,
           fieldProps: {
             ...fieldProps,
-            size: fieldProps.size || "large",
+            size: fieldProps.size || 'large',
             suffix: (
               <SearchOutlined
                 onClick={() => {
                   onConfirmRef.current?.();
                   run();
                 }}
-                style={{ cursor: "pointer", fontSize: 22, color: "#9EA5B2" }}
+                style={{ cursor: 'pointer', fontSize: 22, color: '#9EA5B2' }}
               />
             ),
             placeholder:
               fieldProps.placeholder ||
               ([
-                "date",
-                "dateTime",
-                "dateWeek",
-                "dateMonth",
-                "dateQuarter",
-                "dateYear",
-                "dateRange",
-                "dateTimeRange",
-                "time",
-                "timeRange",
-                "select",
-                "color",
+                'date',
+                'dateTime',
+                'dateWeek',
+                'dateMonth',
+                'dateQuarter',
+                'dateYear',
+                'dateRange',
+                'dateTimeRange',
+                'time',
+                'timeRange',
+                'select',
+                'color',
               ].includes(valueType)
                 ? `请选择${title}`
                 : `请输入${title}`),
             onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => {
-              if (e.key === "Enter") {
+              if (e.key === 'Enter') {
                 onConfirmRef.current?.();
                 run();
               }
@@ -140,7 +141,7 @@ const RhTable = <
           },
           formItemProps: {
             ...formItemProps,
-            label: "",
+            label: '',
           },
         };
       })
@@ -150,14 +151,14 @@ const RhTable = <
   // query查询列定义
   const queryFilterColumns = useMemo(() => {
     return filterColumns
-      .filter((column) => column.filterType === "query")
+      .filter((column) => column.filterType === 'query')
       .sort((a: any, b: any) => a?.order - b?.order) as ProFormColumnsType[];
   }, [filterColumns]);
 
   // light查询列定义
   const lightFilterColumns = useMemo(() => {
     return filterColumns
-      .filter((column) => column.filterType === "light")
+      .filter((column) => column.filterType === 'light')
       .sort((a: any, b: any) => a?.order - b?.order) as ProFormColumnsType[];
   }, [filterColumns]);
 
@@ -167,10 +168,10 @@ const RhTable = <
       dataIndex,
       title,
       valueEnum,
-      fieldProps = { size: "large" },
+      fieldProps = { size: 'large' },
     } = column;
 
-    if (valueType === "digit") {
+    if (valueType === 'digit') {
       return (
         <ProFormDigit
           key={dataIndex}
@@ -181,7 +182,7 @@ const RhTable = <
       );
     }
 
-    if (valueType === "date") {
+    if (valueType === 'date') {
       return (
         <ProFormDatePicker
           key={dataIndex}
@@ -192,7 +193,7 @@ const RhTable = <
       );
     }
 
-    if (valueType === "dateRange" || valueType === "dateTime") {
+    if (valueType === 'dateRange') {
       return (
         <ProFormDateRangePicker
           key={dataIndex}
@@ -203,7 +204,7 @@ const RhTable = <
       );
     }
 
-    if (valueType === "select" || valueEnum) {
+    if (valueType === 'select' || valueEnum) {
       return (
         <ProFormSelect
           key={dataIndex}
@@ -215,7 +216,7 @@ const RhTable = <
       );
     }
 
-    if (valueType === "text" || !valueType) {
+    if (valueType === 'text' || !valueType) {
       return (
         <ProFormText
           key={dataIndex}
@@ -251,6 +252,7 @@ const RhTable = <
 
   return (
     <div className="rh-table">
+      {/* TODO: 支持自定义宽度，而不是colSize控制太宽 */}
       {queryFilterColumns.length > 0 && (
         <BetaSchemaForm
           className="rh-table-query-filter-form"
@@ -261,6 +263,12 @@ const RhTable = <
           columns={queryFilterColumns}
           onValuesChange={run}
         />
+      )}
+
+      {toolBarRender && (
+        <div className="rh-table-toolbar">
+          {(toolBarRender as any)().map((item: any) => item)}
+        </div>
       )}
 
       {lightFilterColumns.length > 0 && (

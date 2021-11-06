@@ -1,15 +1,15 @@
 /* eslint-disable no-void */
 /* eslint-disable no-param-reassign */
-import { downloadBlob } from "@/utils/download";
-import { message } from "antd";
-import type { AxiosInstance, AxiosRequestConfig, ResponseType } from "axios";
-import axios from "axios";
-import { BASE_URL } from "../../../config/project-env";
+import { downloadBlob } from '@/utils/download';
+import { message } from 'antd';
+import type { AxiosInstance, AxiosRequestConfig, ResponseType } from 'axios';
+import axios from 'axios';
+import { BASE_URL } from '../../../config/project-env';
 
 // request
 export const REQ_RESEND_MAX_COUNT = 1;
 export const REQ_RESEND_COUNT_EXCEED_CODE = 4000001;
-export const REQ_RESEND_COUNT_EXCEED_MSG = "重发次数超出上限";
+export const REQ_RESEND_COUNT_EXCEED_MSG = '重发次数超出上限';
 export const REQ_OVERTIME_DURATION = 10 * 1000;
 export const RES_SUCCESS_DEFAULT_CODE = 2000; // 处理成功
 export const RES_NOT_FOUND_CODE = 3000; // 处理失败
@@ -23,7 +23,7 @@ export const ERR_MESSAGE_SHOW_DURATION = 3;
 export type QueryParamsType = Record<string | number, any>;
 
 export interface FullRequestParams
-  extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
+  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -40,11 +40,11 @@ export interface FullRequestParams
 
 export type RequestParams = Omit<
   FullRequestParams,
-  "body" | "method" | "query" | "path"
+  'body' | 'method' | 'query' | 'path'
 >;
 
 export interface ApiConfig<SecurityDataType = unknown>
-  extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
+  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
   securityWorker?: (
     securityData: SecurityDataType | null
   ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
@@ -53,9 +53,9 @@ export interface ApiConfig<SecurityDataType = unknown>
 }
 
 export enum ContentType {
-  Json = "application/json",
-  FormData = "multipart/form-data",
-  UrlEncoded = "application/x-www-form-urlencoded",
+  Json = 'application/json',
+  FormData = 'multipart/form-data',
+  UrlEncoded = 'application/x-www-form-urlencoded',
 }
 
 export interface IUserAuthInfo {
@@ -64,22 +64,22 @@ export interface IUserAuthInfo {
   token?: string;
 }
 
-export const userAuthInfo = "_userAuthInfo";
+export const USER_AUTH_KEY = '_userAuthInfo';
 
 export const setUserAuthInfo = (token: IUserAuthInfo) => {
-  let tokenStr = "";
+  let tokenStr = '';
   try {
     tokenStr = JSON.stringify(token);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
   }
-  localStorage.setItem(userAuthInfo, tokenStr);
+  localStorage.setItem(USER_AUTH_KEY, tokenStr);
   return token;
 };
 
 export const getUserAuthInfo = () => {
-  const authInfoStr = localStorage.getItem(userAuthInfo);
+  const authInfoStr = localStorage.getItem(USER_AUTH_KEY);
   let authInfo: IUserAuthInfo = {};
 
   if (!authInfoStr) return authInfo;
@@ -95,23 +95,23 @@ export const getUserAuthInfo = () => {
 };
 
 export const getToken = () => {
-  return getUserAuthInfo()?.token || "";
+  return getUserAuthInfo()?.token || '';
 };
 
 const HOURS = 60 * 60 * 1000;
 const DAY = 24 * HOURS;
 const WEEK = 7 * DAY;
-const RefreshTokenUrl = "/api/base/user/refreshToken";
+const RefreshTokenUrl = '/api/base/user/refreshToken';
 
 const goLogin = () => {
-  if (window.location.pathname !== "/user/login") {
-    window.location.replace("/user/login");
+  if (window.location.pathname !== '/user/login') {
+    window.location.replace('/user/login');
   }
 };
 export class HttpClient<SecurityDataType = unknown> {
   private instance: AxiosInstance;
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
+  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
   private secure?: boolean;
   private format?: ResponseType;
 
@@ -137,7 +137,7 @@ export class HttpClient<SecurityDataType = unknown> {
           // ['X-Access-Token'] is a custom headers key
           config.headers.token = token;
         }
-        config.headers["Content-Type"] = "application/json";
+        config.headers['Content-Type'] = 'application/json';
         return config;
       },
       (error) => {
@@ -153,7 +153,7 @@ export class HttpClient<SecurityDataType = unknown> {
         // 设置responseType='blob'后，后端就算是返回json也会被当成blob
         if (response.data instanceof Blob) {
           // 有这个header代表是真正的blob流
-          if (response.headers["content-disposition"]) {
+          if (response.headers['content-disposition']) {
             downloadBlob(response);
             return response.data;
           }
@@ -161,7 +161,7 @@ export class HttpClient<SecurityDataType = unknown> {
           // 尝试解析JSON
           try {
             const reader = new FileReader();
-            reader.readAsText(response.data, "utf-8");
+            reader.readAsText(response.data, 'utf-8');
             const data = await new Promise((resolve, reject) => {
               reader.onload = () => {
                 try {
@@ -174,7 +174,7 @@ export class HttpClient<SecurityDataType = unknown> {
 
             res = data;
           } catch (error) {
-            message.error("数据解析异常", ERR_MESSAGE_SHOW_DURATION);
+            message.error('数据解析异常', ERR_MESSAGE_SHOW_DURATION);
             return Promise.reject();
           }
         }
@@ -183,14 +183,14 @@ export class HttpClient<SecurityDataType = unknown> {
         if (res.code !== RES_SUCCESS_DEFAULT_CODE) {
           if (res.code === RES_UNAUTHORIZED_CODE) {
             // to re-login
-            message.info("您已经登出，您可以取消以停留在此页面，或再次登录");
+            message.info('您已经登出，您可以取消以停留在此页面，或再次登录');
             setTimeout(() => {
               this.logout();
             }, 2000);
           } else if (res.code === RES_PERMISSION_DENIED_CODE) {
             // token不存在,请重新登录账户
             message.error(
-              res.desc || res.message || "Error",
+              res.desc || res.message || 'Error',
               ERR_MESSAGE_SHOW_DURATION
             );
             setTimeout(() => {
@@ -198,12 +198,12 @@ export class HttpClient<SecurityDataType = unknown> {
             }, 1500);
           } else {
             message.error(
-              res.desc || res.message || "Error",
+              res.desc || res.message || 'Error',
               ERR_MESSAGE_SHOW_DURATION
             );
           }
           // return new Error(res.desc || res.message || 'Error');
-          return Promise.reject(res.desc || res.message || "Error");
+          return Promise.reject(res.desc || res.message || 'Error');
         }
         if (res.number && res.size) {
           return res;
@@ -212,7 +212,7 @@ export class HttpClient<SecurityDataType = unknown> {
       },
       (error) => {
         message.error(
-          error.desc || error.message || "Error",
+          error.desc || error.message || 'Error',
           ERR_MESSAGE_SHOW_DURATION
         );
         return Promise.reject(error);
@@ -248,7 +248,7 @@ export class HttpClient<SecurityDataType = unknown> {
   private refreshToken = () => {
     return this.instance.request({
       url: RefreshTokenUrl,
-      method: "GET",
+      method: 'GET',
     });
   };
 
@@ -278,7 +278,7 @@ export class HttpClient<SecurityDataType = unknown> {
     }
 
     const secureParams =
-      ((typeof secure === "boolean" ? secure : this.secure) &&
+      ((typeof secure === 'boolean' ? secure : this.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
@@ -289,10 +289,10 @@ export class HttpClient<SecurityDataType = unknown> {
       ...requestParams,
       headers: {
         ...(type && type !== ContentType.FormData
-          ? { "Content-Type": type }
+          ? { 'Content-Type': type }
           : {}),
         ...(requestParams.headers || {}),
-        token: localStorage.getItem("_token"),
+        token: localStorage.getItem('_token'),
       },
       params: query,
       responseType: responseFormat,

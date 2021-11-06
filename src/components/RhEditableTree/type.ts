@@ -1,5 +1,5 @@
-import type { DataNode, EventDataNode } from "rc-tree/lib/interface";
-import type { Key, ReactNode } from "react";
+import type { DataNode, EventDataNode } from 'rc-tree/lib/interface';
+import type { Key, ReactNode } from 'react';
 
 export type IBaseNode = {
   /**
@@ -65,11 +65,11 @@ export interface IEditableTree {
    */
   list: ILeafNode[];
   /**
-   * 是否禁止编辑
+   * 是否可编辑
    * @type boolean
-   * @default false
+   * @default true
    */
-  disabled?: boolean;
+  editable?: boolean;
   /**
    * 主题色（`gray` 或 `light`）
    * @type string

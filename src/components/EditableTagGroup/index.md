@@ -1,5 +1,5 @@
 ---
-title: 可编辑标签组
+title: EditableTagGroup
 sidemenu: false
 ---
 
@@ -21,8 +21,8 @@ sidemenu: false
 ## Demo
 
 ```tsx
-import React from "react";
-import Demo from "@/components/EditableTagGroup/Demo.tsx";
+import React from 'react';
+import Demo from '@/components/EditableTagGroup/Demo.tsx';
 
 export default function () {
   return <Demo />;

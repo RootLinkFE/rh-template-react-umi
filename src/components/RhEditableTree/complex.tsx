@@ -1,75 +1,75 @@
 /* eslint-disable  */
-import React, { useState, Key } from "react";
-import EditableTree from "@/components/EditableTree";
-import { message, Input } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import React, { useState, Key } from 'react';
+import RhEditableTree from '@/components/RhEditableTree';
+import { message, Input } from 'antd';
+import { CaretDownOutlined, DownOutlined } from '@ant-design/icons';
 
-import IconNode from "../../assets/images/tree/node.svg";
-import IconModel from "../../assets/images/tree/model.svg";
-import IconLeaf from "../../assets/images/tree/property.svg";
+import IconNode from '../../assets/images/tree/node.svg';
+import IconModel from '../../assets/images/tree/model.svg';
+import IconLeaf from '../../assets/images/tree/property.svg';
 
 const Demo = () => {
   const [dataList, setDataList] = useState([
     {
       id: 1,
-      name: "挖掘机",
+      name: '挖掘机',
       parentId: 0,
-      type: "model",
+      type: 'model',
       icon: null,
     },
     {
       id: 2,
-      name: "主臂",
+      name: '主臂',
       parentId: 1,
-      type: "node",
+      type: 'node',
     },
     {
       id: 3,
-      name: "变幅机构",
+      name: '变幅机构',
       parentId: 1,
-      type: "node",
+      type: 'node',
     },
     {
       id: 4,
-      name: "油缸",
+      name: '油缸',
       parentId: 2,
-      type: "node",
+      type: 'node',
     },
     {
       id: 41,
-      name: "角度",
+      name: '角度',
       parentId: 2,
-      type: "attribute",
+      type: 'attribute',
     },
     {
       id: 5,
-      name: "变幅",
+      name: '变幅',
       parentId: 3,
-      type: "node",
+      type: 'node',
     },
     {
       id: 8,
-      name: "泵机",
+      name: '泵机',
       parentId: 0,
-      type: "model",
+      type: 'model',
     },
     {
       id: 9,
-      name: "Node",
+      name: 'Node',
       parentId: 8,
-      type: "node",
+      type: 'node',
     },
     {
       id: 10,
-      name: "aaa属性",
+      name: 'aaa属性',
       parentId: 8,
-      type: "attribute",
+      type: 'attribute',
     },
     {
       id: 11,
-      name: "xxx属性",
+      name: 'xxx属性',
       parentId: 8,
-      type: "attribute",
+      type: 'attribute',
     },
   ]);
 
@@ -115,29 +115,29 @@ const Demo = () => {
   };
   return (
     <div className="flex">
-      <EditableTree
-        blockNode
+      <RhEditableTree
+        showLine={{ showLeafIcon: false }}
+        switcherIcon={<CaretDownOutlined />}
         height={400}
         list={dataList as any}
-        switcherIcon={<DownOutlined />}
         iconRender={(nodeType?: string) => {
-          if (nodeType === "model") {
+          if (nodeType === 'model') {
             return IconModel;
-          } else if (nodeType === "node") {
+          } else if (nodeType === 'node') {
             return IconNode;
           } else {
             return IconLeaf;
           }
         }}
         onEdit={(value, id) => {
-          console.log("value, id: ", value, id);
+          console.log('value, id: ', value, id);
           value && handleEdit(value, id);
           value
             ? message.success(`value:${value}, id:${id}`)
             : message.warn(`value为空`);
         }}
         onCreate={(value, parentId) => {
-          console.log("value,parentId: ", value, parentId);
+          console.log('value,parentId: ', value, parentId);
           value
             ? message.success(`value:${value}, parentId:${parentId}`)
             : message.warn(`value为空`);

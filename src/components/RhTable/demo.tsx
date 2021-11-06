@@ -1,11 +1,11 @@
-import { EllipsisOutlined, PlusOutlined } from "@ant-design/icons";
-import type { ActionType } from "@ant-design/pro-table";
-import { TableDropdown } from "@ant-design/pro-table";
-import { Button, Dropdown, Menu, Space, Tag } from "antd";
-import React from "react";
-import request from "umi-request";
-import type { RhColumns } from ".";
-import RhTable from ".";
+import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
+import type { ActionType } from '@ant-design/pro-table';
+import { TableDropdown } from '@ant-design/pro-table';
+import { Button, Dropdown, Menu, Space, Tag } from 'antd';
+import React from 'react';
+import request from 'umi-request';
+import type { RhColumns } from '.';
+import RhTable from '.';
 
 type GithubIssueItem = {
   url: string;
@@ -25,47 +25,47 @@ type GithubIssueItem = {
 
 const columns: RhColumns<GithubIssueItem>[] = [
   {
-    dataIndex: "index",
+    dataIndex: 'index',
     width: 48,
     hideInSearch: true,
   },
   {
-    title: "标题",
-    dataIndex: "title",
+    title: '标题',
+    dataIndex: 'title',
     copyable: true,
     ellipsis: true,
-    filterType: "query",
-    tip: "标题过长会自动收缩",
+    filterType: 'query',
+    tip: '标题过长会自动收缩',
   },
   {
-    title: "状态",
-    dataIndex: "state",
+    title: '状态',
+    dataIndex: 'state',
     filters: true,
-    filterType: "light",
+    filterType: 'light',
     onFilter: true,
-    valueType: "select",
+    valueType: 'select',
     valueEnum: {
-      all: { text: "全部", status: "Default" },
+      all: { text: '全部', status: 'Default' },
       open: {
-        text: "未解决",
-        status: "Error",
+        text: '未解决',
+        status: 'Error',
       },
       closed: {
-        text: "已解决",
-        status: "Success",
+        text: '已解决',
+        status: 'Success',
         disabled: true,
       },
       processing: {
-        text: "解决中",
-        status: "Processing",
+        text: '解决中',
+        status: 'Processing',
       },
     },
   },
   {
-    title: "标签",
-    dataIndex: "labels",
+    title: '标签',
+    dataIndex: 'labels',
 
-    filterType: "light",
+    filterType: 'light',
     renderFormItem: (_, { defaultRender }) => {
       return defaultRender(_);
     },
@@ -80,18 +80,18 @@ const columns: RhColumns<GithubIssueItem>[] = [
     ),
   },
   {
-    title: "创建时间",
-    key: "showTime",
-    filterType: "query",
-    dataIndex: "created_at",
-    valueType: "dateTime",
+    title: '创建时间',
+    key: 'showTime',
+    filterType: 'query',
+    dataIndex: 'created_at',
+    valueType: 'dateTime',
     sorter: true,
     hideInSearch: true,
   },
   {
-    title: "创建时间",
-    dataIndex: "created_at",
-    valueType: "dateRange",
+    title: '创建时间',
+    dataIndex: 'created_at',
+    valueType: 'dateRange',
     hideInTable: true,
     search: {
       transform: (value) => {
@@ -103,8 +103,8 @@ const columns: RhColumns<GithubIssueItem>[] = [
     },
   },
   {
-    title: "操作",
-    valueType: "option",
+    title: '操作',
+    valueType: 'option',
     render: (text, record, _, action) => [
       <a
         key="editable"
@@ -121,8 +121,8 @@ const columns: RhColumns<GithubIssueItem>[] = [
         key="actionGroup"
         onSelect={() => action?.reload()}
         menus={[
-          { key: "copy", name: "复制" },
-          { key: "delete", name: "删除" },
+          { key: 'copy', name: '复制' },
+          { key: 'delete', name: '删除' },
         ]}
       />,
     ],
@@ -146,21 +146,21 @@ export default () => {
       request={async (params = {}) => {
         return request<{
           data: GithubIssueItem[];
-        }>("https://proapi.azurewebsites.net/github/issues", {
+        }>('https://proapi.azurewebsites.net/github/issues', {
           params,
         });
       }}
       editable={{
-        type: "multiple",
+        type: 'multiple',
       }}
       rowKey="id"
       search={{
-        labelWidth: "auto",
+        labelWidth: 'auto',
       }}
       form={{
         // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
         syncToUrl: (values, type) => {
-          if (type === "get") {
+          if (type === 'get') {
             return {
               ...values,
               created_at: [values.startTime, values.endTime],

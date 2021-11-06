@@ -4,9 +4,9 @@
  * @Description: Demo
  */
 
-import { Space } from "antd";
-import React, { useState } from "react";
-import EditableTagGroup from ".";
+import { Space } from 'antd';
+import React, { useState } from 'react';
+import EditableTagGroup from '.';
 
 export default (): React.ReactNode => {
   const [tags, setTags] = useState<string[]>([]);

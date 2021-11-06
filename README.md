@@ -19,6 +19,7 @@
   - 如果要去掉，可以注释`styles/reset/index.less`
 - Swagger Doc Api TypeScript 接口代码生成
 - 主题换色
+- 沉淀组件：http://components.leekhub.com
 
 ## 使用说明
 
@@ -53,7 +54,7 @@ TypeScript 的 API 生成通过自研 `@roothub/cli` 来生成，生成的文件
 **BaseApi**
 
 ```bash
-rh api http://81.70.xx.84/leekhub-model-server/v2/api-docs?group=PROTOCOL%20SERVER%20base%20API -n
+rh api http://81.70.xx.84/leekhub-model-server/v2/api-docs?group=LEEKHUB%20SERVER%20base%20API -n
 ```
 
 执行示例 eg:

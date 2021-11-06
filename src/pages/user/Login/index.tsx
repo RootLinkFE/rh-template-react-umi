@@ -1,17 +1,17 @@
-import Footer from "@/components/Footer";
-import type { YongHuMingMiMaDengLuQingQiuCanShu } from "@/rh/apis/Base/data-contracts";
-import { setUserAuthInfo } from "@/rh/apis/http-client";
-import { THEME_KEY } from "@/shared/constant";
-import { encrypt } from "@/utils/utils";
-import ProForm, { ProFormText } from "@ant-design/pro-form";
-import { Alert, Divider } from "antd";
-import React, { useEffect, useState } from "react";
-import { history, Link, useModel } from "umi";
-import { colorSet } from "../../../../config/theme";
-import styles from "./index.less";
+import Footer from '@/components/Footer';
+import type { YongHuMingMiMaDengLuQingQiuCanShu } from '@/rh/apis/Base/data-contracts';
+import { setUserAuthInfo } from '@/rh/apis/http-client';
+import { THEME_KEY } from '@/shared/constant';
+import { encrypt } from '@/utils/utils';
+import ProForm, { ProFormText } from '@ant-design/pro-form';
+import { Alert, Divider } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { history, Link, useModel } from 'umi';
+import { colorSet } from '../../../../config/theme';
+import styles from './index.less';
 
 interface ILoginResult {
-  status?: "fail" | "success";
+  status?: 'fail' | 'success';
   msg?: string;
 }
 
@@ -34,19 +34,19 @@ const goto = () => {
   setTimeout(() => {
     const { query } = history.location;
     const { redirect } = query as { redirect: string };
-    history.push(redirect || "/");
+    history.push(redirect || '/');
   }, 10);
 };
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [userLoginState, setUserLoginState] = useState<ILoginResult>({});
-  const { userLogin } = useModel("base.user");
-  const { initialState, setInitialState } = useModel("@@initialState");
+  const { userLogin } = useModel('base.user');
+  const { initialState, setInitialState } = useModel('@@initialState');
 
   useEffect(() => {
     const color = window?.localStorage.getItem(THEME_KEY) || colorSet[0];
-    (window as any).less.modifyVars({ "primary-color": color });
+    (window as any).less.modifyVars({ 'primary-color': color });
   }, []);
 
   const fetchUserInfo = async () => {
@@ -65,37 +65,37 @@ const Login: React.FC = () => {
       // 登录
       const msg = await userLogin({
         ...values,
-        password: encrypt.encrypt(values.password) || "",
+        password: encrypt.encrypt(values.password) || '',
       });
       // 存储登录token信息
-      setUserAuthInfo(msg);
+      setUserAuthInfo(msg as any);
       // 重置登录状态信息
       setUserLoginState({
-        status: "success",
-        msg: "",
+        status: 'success',
+        msg: '',
       });
       await fetchUserInfo();
       goto();
     } catch (error: any) {
       // 如果失败去设置用户错误信息
       setUserLoginState({
-        status: "fail",
-        msg: (error?.message as string) || "",
+        status: 'fail',
+        msg: (error?.message as string) || '',
       });
     }
     setSubmitting(false);
     // 绕过登陆
     // 存储登录token信息
     setUserAuthInfo({
-      expireTime: 1634820099130,
+      expireTime: 3471264000000,
       firstLogin: true,
-      token: "xxx",
+      token: 'eyJ0eXAiOiJKV1QiLCJhbGc',
     });
 
     // 重置登录状态信息
     setUserLoginState({
-      status: "success",
-      msg: "",
+      status: 'success',
+      msg: '',
     });
     goto();
   };
@@ -132,20 +132,20 @@ const Login: React.FC = () => {
             }}
             submitter={{
               searchConfig: {
-                submitText: "登 录",
+                submitText: '登 录',
               },
               render: (_, dom) => dom.pop(),
               submitButtonProps: {
                 loading: submitting,
-                size: "large",
+                size: 'large',
                 style: {
-                  width: "100%",
-                  fontSize: "14px",
+                  width: '100%',
+                  fontSize: '14px',
                 },
               },
             }}
           >
-            {userLoginState.status === "fail" &&
+            {userLoginState.status === 'fail' &&
               userLoginState.msg !== undefined && (
                 <LoginMessage content={userLoginState.msg} />
               )}
@@ -153,18 +153,18 @@ const Login: React.FC = () => {
               name="mobile"
               label="手机号码"
               fieldProps={{
-                size: "large",
+                size: 'large',
                 maxLength: 11,
               }}
               placeholder="请输入手机号码(随意手机)"
               rules={[
                 {
                   required: true,
-                  message: "请输入用户名!",
+                  message: '请输入用户名!',
                 },
                 {
                   pattern: /^1[3-9]\d{9}$/,
-                  message: "不合法的手机号格式!",
+                  message: '不合法的手机号格式!',
                 },
               ]}
             />
@@ -172,12 +172,12 @@ const Login: React.FC = () => {
               label="密码"
               name="password"
               fieldProps={{
-                size: "large",
+                size: 'large',
               }}
               rules={[
                 {
                   required: true,
-                  message: "请输入密码!",
+                  message: '请输入密码!',
                 },
               ]}
               placeholder="请输入密码(随意)"
@@ -185,9 +185,9 @@ const Login: React.FC = () => {
           </ProForm>
           <a
             style={{
-              float: "right",
-              marginTop: "12px",
-              fontSize: "12px",
+              float: 'right',
+              marginTop: '12px',
+              fontSize: '12px',
             }}
           >
             忘记密码

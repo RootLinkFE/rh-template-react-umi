@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ILeafNode } from "./type";
+import { ILeafNode } from './type';
 
 export const isNotEmptyArray = <T = any>(data: Array<T>) =>
   data && Array.isArray(data) && data.length > 0;

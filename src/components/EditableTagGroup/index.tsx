@@ -4,10 +4,10 @@
  * @Description: 用数组生成一组标签，可以动态添加和删除。
  */
 
-import { PlusOutlined } from "@ant-design/icons";
-import { Input, Row, Tag, Tooltip } from "antd";
-import type { ChangeEvent } from "react";
-import React, { useCallback, useRef, useState } from "react";
+import { PlusOutlined } from '@ant-design/icons';
+import { Input, Row, Tag, Tooltip } from 'antd';
+import type { ChangeEvent } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 type EditableTagGroupProps = {
   value?: string[]; // 标签数组
@@ -30,7 +30,7 @@ const EditableTagGroup: React.FC<EditableTagGroupProps> = ({
 }) => {
   const inputRef = useRef<Input>(null);
   const [inputVisible, setInputVisible] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   /**
    * 标签删除回调
@@ -69,7 +69,7 @@ const EditableTagGroup: React.FC<EditableTagGroupProps> = ({
     }
 
     setInputVisible(false);
-    setInputValue("");
+    setInputValue('');
   }, [inputValue, onChange, value]);
 
   return (
@@ -99,9 +99,9 @@ const EditableTagGroup: React.FC<EditableTagGroupProps> = ({
         <Tag
           onClick={showInput}
           style={{
-            background: "#ffffff",
-            borderStyle: "dashed",
-            cursor: "pointer",
+            background: '#ffffff',
+            borderStyle: 'dashed',
+            cursor: 'pointer',
           }}
         >
           <Row align="middle">
@@ -113,9 +113,9 @@ const EditableTagGroup: React.FC<EditableTagGroupProps> = ({
       {disabled && showButton && value?.length === 0 && (
         <Tag
           style={{
-            background: "#f5f5f5",
-            borderStyle: "dashed",
-            cursor: "not-allowed",
+            background: '#f5f5f5',
+            borderStyle: 'dashed',
+            cursor: 'not-allowed',
           }}
         >
           <Row align="middle">

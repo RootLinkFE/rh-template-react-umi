@@ -1,35 +1,40 @@
-import { PlusCircleOutlined } from "@ant-design/icons";
-import { Input, Popconfirm, Tooltip, Tree } from "antd";
-import type { EventDataNode, TreeProps } from "antd/lib/tree";
-import { compact, debounce, flattenDepth } from "lodash";
-import type { Key } from "react";
-import React, { useCallback, useEffect, useState } from "react";
-import IconCreate from "../../assets/images/tree/icon-create.svg";
-import IconDelete from "../../assets/images/tree/icon-delete.svg";
-import IconEdit from "../../assets/images/tree/icon-edit.svg";
-import IconFont from "../IconFont";
-import "./EditableTree.less";
-import type { ILeafNode, IEditableTree } from "./type";
-import { isNotEmptyArray, translateDataToTree } from "./utils";
+import {
+  PlusCircleOutlined,
+  CaretDownOutlined,
+  EllipsisOutlined,
+} from '@ant-design/icons';
+import { Input, Popconfirm, Tooltip, Tree, Dropdown, Menu } from 'antd';
+import type { EventDataNode, TreeProps } from 'antd/lib/tree';
+import { compact, debounce, flattenDepth } from 'lodash';
+import type { Key } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import IconCreate from '../../assets/images/tree/icon-create.svg';
+import IconDelete from '../../assets/images/tree/icon-delete.svg';
+import IconEdit from '../../assets/images/tree/icon-edit.svg';
+import IconFont from '../IconFont';
+import './styles.less';
+import './index.less';
+import type { ILeafNode, IEditableTree } from './type';
+import { isNotEmptyArray, translateDataToTree } from './utils';
 
 const { Search } = Input;
 
-const INPUT_ID = "inputId";
+const INPUT_ID = 'inputId';
 
-const EditableTree = ({
+const RhEditableTree = ({
   debug = false,
   list,
   treeData,
   expandedKeys = [],
   selectedKeys = [],
-  disabled = false,
+  editable = true,
   autoExpandParent = true,
   search = true,
   showAddMenu = true,
   showAddBtn = false,
   showDeleteMenu = true,
-  theme = "gray",
-  deleteTooltipText = "子节点将一起删除，是否继续？",
+  theme = 'gray',
+  deleteTooltipText = '子节点将一起删除，是否继续？',
   rootParentId = 0,
   onEdit,
   onCreate,
@@ -41,18 +46,22 @@ const EditableTree = ({
   onClick,
   addBtnCallback = () => {},
   height = 600,
+  menuProps,
   ...props
-}: IEditableTree & TreeProps) => {
+}: IEditableTree &
+  TreeProps & {
+    menuProps?: any; // 未完成 先any
+  }) => {
   const [isInputShow, toggleInputShow] = useState(true);
-  const [nodeType, setNodeType] = useState("");
+  const [nodeType, setNodeType] = useState('');
   const [isUpdated, toggleUpdated] = useState(false);
   const [lineList, setLineList] = useState<ILeafNode[]>([]);
   const [treeList, setTreeList] = useState<ILeafNode[]>([]);
   const [expandKeys, setExpandKeys] = useState<any[]>(expandedKeys);
   const [selectKeys, setSelectKeys] = useState<Key[]>(selectedKeys);
   const [autoExpand, setAutoExpand] = useState(autoExpandParent);
-  const [inputValue, setInputValue] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const lineLeafList: ILeafNode[] = isNotEmptyArray(list)
@@ -120,7 +129,7 @@ const EditableTree = ({
 
   const handleLeafEdit = (value: string, key: Key) => {
     toggleLeafEdit(key, false);
-    setInputValue("");
+    setInputValue('');
     if (isUpdated && onEdit) {
       onEdit(value, key);
     }
@@ -128,7 +137,7 @@ const EditableTree = ({
 
   const handleLeafCreate = (value: string, parentId: Key, type: string) => {
     toggleLeafCreate(parentId, type, false);
-    setInputValue("");
+    setInputValue('');
     if (onCreate) {
       onCreate(value, type, parentId);
     }
@@ -278,11 +287,12 @@ const EditableTree = ({
   ) => {
     if (debug) {
       // eslint-disable-next-line no-console
-      console.log("treeList=", treeList);
+      console.log('treeList=', treeList);
     }
     const tree = leafList.map((leaf) => ({
       key: leaf.key,
-      icon: leaf.icon || "",
+      icon: leaf.icon || '',
+      isLeaf: !!leaf.parentId,
       title: !leaf.isEdit ? (
         <div className="tree-leaf">
           {iconRender ? (
@@ -293,7 +303,27 @@ const EditableTree = ({
             )
           )}
           {highLightSearchTitle(leaf)}
-          {!disabled && !leaf.disabled && actionElement(leaf)}
+          {!menuProps && editable && !leaf.disabled && actionElement(leaf)}
+          {menuProps && (
+            <Dropdown
+              className="rh-editable-tree-menu"
+              overlay={
+                <Menu
+                  onClick={(e) => {
+                    e.domEvent.stopPropagation();
+                    menuProps.onClick(leaf, e);
+                  }}
+                >
+                  {menuProps.types[leaf.type || 'default']}
+                </Menu>
+              }
+              trigger={['click']}
+            >
+              <a onClick={(e) => e.stopPropagation()}>
+                {menuProps.trigger || <EllipsisOutlined rotate={90} />}
+              </a>
+            </Dropdown>
+          )}
         </div>
       ) : (
         <Input
@@ -323,7 +353,8 @@ const EditableTree = ({
     return isCreate
       ? tree.concat({
           key: idx - 1000000,
-          icon: "",
+          icon: '',
+          isLeaf: true,
           title: (
             <Input
               maxLength={10}
@@ -331,7 +362,7 @@ const EditableTree = ({
               ref={inputNode}
               value={inputValue}
               placeholder={
-                nodeType === "NODE" ? "请输入节点名称" : "请输入属性名称"
+                nodeType === 'NODE' ? '请输入节点名称' : '请输入属性名称'
               }
               // placeholder="输入限制为10个字符"
               suffix={<span>{inputValue.length}/10</span>}
@@ -353,10 +384,10 @@ const EditableTree = ({
 
   return (
     <div
-      className="container-editable-tree"
+      className="rh-editable-tree"
       style={{
-        backgroundColor: theme === "light" ? "#fff" : "",
-        height: height ? `${height}px` : "",
+        backgroundColor: theme === 'light' ? '#fff' : '',
+        height: height ? `${height}px` : '',
       }}
     >
       <div className="flex items-center justify-between w-11/12">
@@ -383,6 +414,7 @@ const EditableTree = ({
         )}
       </div>
       <Tree
+        switcherIcon={<CaretDownOutlined />} // 默认
         {...props}
         blockNode
         selectedKeys={selectKeys}
@@ -392,9 +424,10 @@ const EditableTree = ({
         onSelect={handleTreeNodeSelect}
         onClick={handleTreeNodeClick}
         autoExpandParent={autoExpand}
+        showLine={{ showLeafIcon: false }}
       />
     </div>
   );
 };
 
-export default EditableTree;
+export default RhEditableTree;
