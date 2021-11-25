@@ -15,11 +15,11 @@
 
 ## 功能特点
 
+- [@roothub/components](http://components.leekhub.com/) 组件
 - Antd 样式覆写，满足 UI 风格
   - 如果要去掉，可以注释`styles/reset/index.less`
 - Swagger Doc Api TypeScript 接口代码生成
 - 主题换色
-- 沉淀组件：http://components.leekhub.com
 
 ## 使用说明
 

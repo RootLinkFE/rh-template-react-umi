@@ -1,6 +1,4 @@
-import FileImportModal from '@/components/FileImportModal';
-import type { RhActionType, RhColumns } from '@/components/RhTable';
-import RhTable from '@/components/RhTable';
+import { RhTable, RhFileImportModal } from '@roothub/components';
 import { DownOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { TableDropdown } from '@ant-design/pro-table';
@@ -25,7 +23,7 @@ type GithubIssueItem = {
   closed_at?: string;
 };
 
-const columns: RhColumns<GithubIssueItem>[] = [
+const columns: any[] = [
   {
     dataIndex: 'index',
     width: 48,
@@ -69,10 +67,10 @@ const columns: RhColumns<GithubIssueItem>[] = [
     title: '标签',
     dataIndex: 'labels',
     filterType: 'light',
-    renderFormItem: (_, { defaultRender }) => {
+    renderFormItem: (_: any, { defaultRender }: any) => {
       return defaultRender(_);
     },
-    render: (_, record) => (
+    render: (_: any, record: { labels: { name: any; color: any }[] }) => (
       <Space>
         {record.labels.map(({ name, color }) => (
           <Tag color={color} key={name}>
@@ -97,7 +95,7 @@ const columns: RhColumns<GithubIssueItem>[] = [
     hideInTable: true,
     hideInSearch: true,
     search: {
-      transform: (value) => {
+      transform: (value: any[]) => {
         return {
           startTime: value[0],
           endTime: value[1],
@@ -108,7 +106,12 @@ const columns: RhColumns<GithubIssueItem>[] = [
   {
     title: '操作',
     valueType: 'option',
-    render: (text, record, _, action) => [
+    render: (
+      text: any,
+      record: { id: any; url: string | undefined },
+      _: any,
+      action: { startEditable: (arg0: any) => void; reload: () => void }
+    ) => [
       <a
         key="editable"
         onClick={() => {
@@ -135,7 +138,7 @@ const columns: RhColumns<GithubIssueItem>[] = [
 export default (props: any) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isImportModalVisible, setIsImportModalVisible] = useState(false);
-  const actionRef = React.useRef<RhActionType>();
+  const actionRef = React.useRef<any>();
 
   const exportTupleParamsRef = useRef<{
     idList?: React.Key[];
@@ -228,8 +231,8 @@ export default (props: any) => {
         dateFormatter="string"
       />
       {isImportModalVisible && (
-        <FileImportModal
-          title="导入SP数据"
+        <RhFileImportModal
+          title="导入数据"
           visible={isImportModalVisible}
           // 模板下载地址
           downloadUrl={

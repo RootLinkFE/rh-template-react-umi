@@ -1,41 +1,44 @@
-import type { RhColumns } from "@/components/RhTable";
-import RhTable from "@/components/RhTable";
-import type { ActionType } from "@ant-design/pro-table";
-import { PageContainer } from "@ant-design/pro-layout";
-import React from "react";
+import { RhTable } from '@roothub/components';
+import { PageContainer } from '@ant-design/pro-layout';
+import React from 'react';
 
-const columns: RhColumns<any>[] = [
+const columns: any[] = [
   {
-    title: "标题",
-    dataIndex: "title",
+    title: '标题',
+    dataIndex: 'title',
     ellipsis: true,
-    filterType: "query",
-    tip: "标题过长会自动收缩",
+    filterType: 'query',
+    tip: '标题过长会自动收缩',
   },
   {
-    title: "状态",
-    dataIndex: "state",
-    valueType: "select",
+    title: '状态',
+    dataIndex: 'state',
+    valueType: 'select',
     hideInSearch: true,
     valueEnum: {
-      all: "全部",
-      open: "未解决",
-      closed: "已解决",
-      processing: "解决中",
+      all: '全部',
+      open: '未解决',
+      closed: '已解决',
+      processing: '解决中',
     },
   },
   {
-    title: "创建时间",
-    key: "showTime",
-    filterType: "query",
-    dataIndex: "created_at",
-    valueType: "dateTime",
+    title: '创建时间',
+    key: 'showTime',
+    filterType: 'query',
+    dataIndex: 'created_at',
+    valueType: 'dateTime',
     hideInSearch: true,
   },
   {
-    title: "操作",
-    valueType: "option",
-    render: (text, record, _, action) => [
+    title: '操作',
+    valueType: 'option',
+    render: (
+      text: string,
+      record: { id: any; url: string | undefined },
+      _: any,
+      action: { startEditable: (arg0: any) => void }
+    ) => [
       <a
         key="editable"
         onClick={() => {
@@ -52,7 +55,7 @@ const columns: RhColumns<any>[] = [
 ];
 
 export default (props: any) => {
-  const actionRef = React.useRef<ActionType>();
+  const actionRef = React.useRef<any>();
   return (
     <PageContainer
       fixedHeader
@@ -74,7 +77,7 @@ export default (props: any) => {
         request={async (params = {}) => {
           // 这里只是举例
           const list: any = await fetch(
-            "https://proapi.azurewebsites.net/github/issues"
+            'https://proapi.azurewebsites.net/github/issues'
           ).then((resp) => resp.json());
 
           return {
