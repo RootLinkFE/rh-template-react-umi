@@ -1,12 +1,12 @@
 // button 组件样式覆盖
 @default-hover-bg-color: @primary-color;
 @default-active-bg-color: @primary-color;
-@primary-hover-bg-color: @primary-color; // #008f3d;
-@primary-active-bg-color: @primary-color; // #008f3d;
+@primary-hover-bg-color: #437fff;
+@primary-active-bg-color: #2e5bb8;
 @danger-text-color: #e60000;
 @danger-hover-bg-color: #e60000;
 @danger-active-bg-color: #e60000;
-@primary-disabled-color: @disabled-color;
+@primary-disabled-color: #bbd6fc;
 @btnHeight: 32px;
 
 .ant-input-search-button {
@@ -19,7 +19,7 @@
   padding: 8px 16px;
   // color: #505363;
   line-height: 10px;
-  outline: none !important;
+  // outline: none !important;
   // 覆写end
   &.ant-btn-icon-only {
     width: 32px;
@@ -72,6 +72,7 @@
       }
       &:active {
         color: @primary-active-bg-color;
+        border: solid 1px @primary-active-bg-color;
       }
     }
     &[disabled] {
@@ -105,12 +106,12 @@
   }
   &:not([disabled]):active {
     background-color: @primary-active-bg-color;
-    border-color: @white-color;
+    border-color: @primary-active-bg-color;
     outline: @primary-active-bg-color solid 1px;
   }
   &[disabled] {
     background-color: @primary-disabled-color !important;
-    border: 1px solid @primary-disabled-color !important;
+    border: none !important;
   }
 }
 .ant-btn-dangerous {
@@ -142,6 +143,11 @@
     color: @primary-color !important;
     &:hover {
       color: @white-color !important;
+    }
+    &[disabled] {
+      color: @primary-disabled-color !important;
+      background-color: #fff !important;
+      border: 1px solid @primary-disabled-color !important;
     }
   }
 }

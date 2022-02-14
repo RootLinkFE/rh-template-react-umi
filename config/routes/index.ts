@@ -19,13 +19,13 @@ export default [
   {
     path: '/welcome',
     name: '总览',
-    icon: 'dashboard',
+    icon: 'rh-icon-gongyezujian-yibiaopan',
     component: './Welcome',
   },
   {
     path: '/table',
     name: '表格示例',
-    icon: 'table',
+    icon: 'rh-icon-liebiao',
     routes: [
       {
         path: '/table/simple',
@@ -42,7 +42,7 @@ export default [
   {
     path: '/form',
     name: '表单',
-    icon: 'form',
+    icon: 'rh-icon-shiyongwendang',
     routes: [
       {
         path: '/form/basic',
@@ -54,7 +54,7 @@ export default [
   {
     path: '/charts',
     name: '图表',
-    icon: 'PieChart',
+    icon: 'rh-icon-tubiao-bingtu',
     component: './charts',
   },
   {

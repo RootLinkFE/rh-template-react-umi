@@ -29,7 +29,7 @@ const BasicForm: FC<Record<string, any>> = () => {
   return (
     <PageContainer
       fixedHeader
-      affixProps={{ offsetTop: 48, children: null }}
+      affixProps={{ children: null }}
       header={{ breadcrumb: {}, onBack: () => window.history.back() }}
     >
       <Card bordered={false}>

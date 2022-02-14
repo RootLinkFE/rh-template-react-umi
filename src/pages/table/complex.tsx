@@ -149,13 +149,14 @@ export default (props: any) => {
   return (
     <PageContainer
       fixedHeader
-      affixProps={{ offsetTop: 48, children: null }}
+      affixProps={{ children: null }}
       header={{
         title: props.route.name,
         breadcrumb: {},
         extra: [
           <Button
             type="primary"
+            size="large"
             key="createBtn"
             onClick={() => {
               history.push(`/form/basic`);
@@ -165,6 +166,7 @@ export default (props: any) => {
           </Button>,
           <Button
             type="default"
+            size="large"
             key="importBtn"
             onClick={() => {
               setIsImportModalVisible(true);
@@ -202,7 +204,7 @@ export default (props: any) => {
               </Menu>
             }
           >
-            <Button type="default">
+            <Button type="default" size="large">
               导出数据 <DownOutlined />
             </Button>
           </Dropdown>,

@@ -59,7 +59,7 @@ export default (props: any) => {
   return (
     <PageContainer
       fixedHeader
-      affixProps={{ offsetTop: 48, children: null }}
+      affixProps={{ children: null }}
       header={{
         title: props.route.name,
         breadcrumb: {},

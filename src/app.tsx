@@ -1,27 +1,30 @@
-import RightContent from "@/components/RightContent";
-import RhApi from "@/rh/apis";
+import RightContent from '@/components/RightContent';
+import RhApi from '@/rh/apis';
 // import Footer from '@/components/Footer';
 // import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from "@ant-design/icons";
-import type { Settings as LayoutSettings } from "@ant-design/pro-layout";
-import { PageLoading } from "@ant-design/pro-layout";
-import { notification } from "antd";
-import type { RequestConfig, RunTimeLayoutConfig } from "umi";
-import { history, Link } from "umi";
-import type { UserResp } from "./rh/apis/Base/data-contracts";
+import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { PageLoading } from '@ant-design/pro-layout';
+import { notification } from 'antd';
+import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
+import { history, Link } from 'umi';
+import menuData from '../config/menus';
+import SideBar from './layouts/SideBar';
+import type { UserResp } from './rh/apis/Base/data-contracts';
 
 /* ConfigProvider.config({
   maskClosable: false,
 }); */
 
-const isDev = process.env.NODE_ENV === "development";
-const loginPath = "/user/login";
+const isDev = process.env.NODE_ENV === 'development';
+const loginPath = '/user/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function gotoLogin() {
   history.push(loginPath); // TODO: 对接登陆后放开这里。测试账号：13666666666/Admin123
 }
@@ -45,9 +48,9 @@ export async function getInitialState(): Promise<{
       // gotoLogin();
     }
     return Promise.resolve({
-      nickName: "超级管理员",
-      username: "admin",
-      mobile: "13666666666",
+      nickName: '超级管理员',
+      username: 'admin',
+      mobile: '13666666666',
     });
     // return undefined;
   };
@@ -111,8 +114,8 @@ export const request: RequestConfig = {
 
     if (!response) {
       notification.error({
-        description: "您的网络发生异常，无法连接服务器",
-        message: "网络异常",
+        description: '您的网络发生异常，无法连接服务器',
+        message: '网络异常',
       });
     }
     throw error;
@@ -127,26 +130,12 @@ export const layout: RunTimeLayoutConfig = ({ initialState }: any) => {
     /*  waterMarkProps: {
       content: initialState?.currentUser?.name,
     }, */
-    // footerRender: () => <Footer />,
-    onPageChange: () => {
-      const { location } = history;
-
-      const dc = document.querySelector(".ant-layout-sider-children");
-      const topMT = document.querySelector(".top-menu-title-box");
-      if (!topMT) {
-        const div = document.createElement("div");
-        const html =
-          '<div class="top-menu-title-box" style="height:48px;word-break:keep-all;border-bottom:1px solid #EBECEF;line-height:48px;font-size: 16px;color: #21252E;font-weight: 500;"><span style="padding-left:40px;">RootHub</span></div>';
-        div.innerHTML = html;
-        if (dc) {
-          dc.insertBefore(div, dc.childNodes[0]);
-        }
-      }
-
-      // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        gotoLogin();
-      }
+    menuRender: (menuProps: any) => {
+      const { location } = menuProps;
+      const { pathname } = location;
+      return (
+        <SideBar collapsible={false} menuData={menuData} pathName={pathname} />
+      );
     },
     links: isDev
       ? [

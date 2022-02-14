@@ -5,6 +5,21 @@ html,
 body,
 #root {
   height: 100%;
+  > .ant-pro-basicLayout-fix-siderbar {
+    > .ant-layout-has-sider {
+      > .ant-layout {
+        margin-left: 224px !important; // 配合菜单
+      }
+      > .ant-layout.sidebar-collapse {
+        margin-left: 56px !important; // 配合菜单
+      }
+      .ant-layout-sider-trigger {
+        height: 40px;
+        color: @white-color;
+        background-color: @primary-color !important;
+      }
+    }
+  }
 }
 
 .colorWeak {
@@ -70,9 +85,16 @@ ol {
   word-break: break-all;
 }
 
-/* .ant-layout-sider-collapsed {
+.ant-layout-sider-collapsed {
   .top-menu-title-box {
     display: none;
   }
 }
- */
+
+/* .ant-layout-header {
+  display: none !important ;
+}
+
+.ant-pro-sider-layout-mix {
+  padding-top: 0 !important ;
+} */
