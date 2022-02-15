@@ -12,10 +12,10 @@ import routes from './routes';
 export const basePathName = '/welcome';
 
 const MENUS: any = {
-  menuHeaderTitle: '协议建模',
+  menuHeaderTitle: 'RootHub',
   menuHeaderTitleIcon: 'rh-icon-icon_yingyongguanli',
-  subMenuCollapseIcon: 'iconRightarrow-filled',
-  subMenuExpandIcon: 'iconarrow_down_line',
+  subMenuCollapseIcon: 'rh-icon-arrow-up',
+  subMenuExpandIcon: 'rh-icon-arrow-down',
   menuItems: [],
 };
 
