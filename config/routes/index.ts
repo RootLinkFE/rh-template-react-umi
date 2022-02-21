@@ -37,6 +37,11 @@ export default [
         name: '复杂表格',
         component: './table/complex',
       },
+      {
+        path: '/table/mock',
+        name: 'mock 表格',
+        component: './table/mock',
+      },
     ],
   },
   {

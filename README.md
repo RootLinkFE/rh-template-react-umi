@@ -41,13 +41,25 @@ $ yarn start
 - [文件夹结构](https://pro.ant.design/zh-CN/docs/folder)
 - 更多开发规范见：[https://pro.ant.design](https://pro.ant.design/zh-CN/docs/introduction)
 
-## @roothub/cli 生成 swagger 接口代码
+## @roothub/cli 根据配置文件生成代码（推荐使用）
 
 TypeScript 的 API 生成通过自研 `@roothub/cli` 来生成，生成的文件夹在 `src/rh/**` 之下。
 
 安装工具包 `npm i @roothub/cli -g`
 
 - `http-client.ts` 封装 Axios 请求拦截，建议生成 api 时不要覆盖。
+
+## @roothub/cli 生成 swagger 接口代码
+
+安装工具包 `npm i @roothub/cli -g`
+
+- rh codegen init 生成配置文件
+
+- rh codegen update 生成 api，并询问是否再生成 mock
+
+- `http-client.ts` 封装 Axios 请求拦截，建议生成 api 时不要覆盖。
+
+- 更多操作 rh codegen -h
 
 ### 生成 api 代码
 
